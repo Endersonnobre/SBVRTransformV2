@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" 
+ xmlns:SBVR="http://www.omg.org/spec/SBVR/20070901/SBVR.xml">
+ <SBVR:ObjectType xmi:id="Cliente">
+    <SBVR:name>Cliente</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Cliente</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Nome</SBVR:name>
+        <SBVR:type>String</SBVR:type>
+      </SBVR:Attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Idade</SBVR:name>
+        <SBVR:type>Integer</SBVR:type>
+      </SBVR:Attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Cartao_Credito</SBVR:name>
+        <SBVR:type>String</SBVR:type>
+      </SBVR:Attribute>
+    </SBVR:attribute>
+  </SBVR:ObjectType>
+
+  <SBVR:ObjectType xmi:id="Conta">
+    <SBVR:name>Conta</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Conta do usuário</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Nome_usuario</SBVR:name>
+        <SBVR:type>String</SBVR:type>
+      </SBVR:Attribute>
+       <SBVR:Attribute>
+        <SBVR:name>Preco</SBVR:name>
+        <SBVR:type>Float</SBVR:type>
+      </SBVR:Attribute>
+    </SBVR:attribute>
+  </SBVR:ObjectType>
+
+  <SBVR:ObjectType xmi:id="Conteudo">
+    <SBVR:name>Conteúdo</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Conteúdo</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Nome</SBVR:name>
+        <SBVR:type>String</SBVR:type>
+      </SBVR:Attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Data_Lancamento</SBVR:name>
+        <SBVR:type>DateTime</SBVR:type>
+      </SBVR:Attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Tipo</SBVR:name>
+        <SBVR:type>String</SBVR:type>
+      </SBVR:Attribute>
+      <SBVR:Attribute>
+        <SBVR:name>Resolucao</SBVR:name>
+        <SBVR:type>ResEnum</SBVR:type>
+      </SBVR:Attribute>
+    </SBVR:attribute>
+  </SBVR:ObjectType>
+
+  <SBVR:ObjectType xmi:id="ContaBasica">
+    <SBVR:name>ContaBasica</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Conta do tipo básico</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:supertype>
+      <SBVR:ObjectTypeReference href="#Conta"/>
+    </SBVR:supertype>
+    <SBVR:attribute> 
+    </SBVR:attribute>
+  </SBVR:ObjectType>
+
+  <SBVR:ObjectType xmi:id="ContaPremium">
+    <SBVR:name>ContaPremium</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Conta do tipo premium</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:supertype>
+      <SBVR:ObjectTypeReference href="#Conta"/>
+    </SBVR:supertype>
+    <SBVR:attribute> 
+    </SBVR:attribute>
+  </SBVR:ObjectType>
+
+  <SBVR:ObjectType xmi:id="ContaDiamond">
+    <SBVR:name>ContaDiamond</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Conta do tipo diamond</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:supertype>
+      <SBVR:ObjectTypeReference href="#Conta"/>
+    </SBVR:supertype>
+    <SBVR:attribute> 
+    </SBVR:attribute>
+  </SBVR:ObjectType>
+  
+  <SBVR:EnumerationType>
+    <SBVR:name>ResEnum</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Resolução dos conteúdos.</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:enumerationValue>
+      <SBVR:Value>
+        <SBVR:name>720p</SBVR:name>
+      </SBVR:Value>
+      <SBVR:Value>
+        <SBVR:name>1080p</SBVR:name>
+      </SBVR:Value>
+      <SBVR:Value>
+        <SBVR:name>4k</SBVR:name>
+      </SBVR:Value>
+    </SBVR:enumerationValue>
+  </SBVR:EnumerationType>
+
+  <SBVR:AssociativeFactType>
+    <SBVR:name>Cliente possui Conta</SBVR:name>
+    <SBVR:definition>
+      <SBVR:Text>Um cliente pode possuir pelo menos uma conta.</SBVR:Text>
+    </SBVR:definition>
+    <SBVR:role>
+      <SBVR:FactTypeRole>
+        <SBVR:name>Cliente</SBVR:name>
+        <SBVR:rolePlayer>
+          <SBVR:ObjectTypeReference href="#Cliente"/>
+        </SBVR:rolePlayer>
+      </SBVR:FactTypeRole>
+      <SBVR:FactTypeRole>
+        <SBVR:name>Conta</SBVR:name>
+        <SBVR:rolePlayer>
+          <SBVR:ObjectTypeReference href="#Conta"/>
+        </SBVR:rolePlayer>
+      </SBVR:FactTypeRole>
+    </SBVR:role>
+  </SBVR:AssociativeFactType>
+
+</xmi:XMI>
