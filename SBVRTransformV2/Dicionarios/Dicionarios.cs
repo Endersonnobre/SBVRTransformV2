@@ -28,8 +28,7 @@ namespace SBVRTransformV2.Dicionarios
             { "no máximo", "0..n" },
             {"exatamente um ", "1..1" },
             {"exatamente uma ", "1..1" },
-            {"exatamente", "n..n" },
-            {"pelo menos e no máximo ", "n..m" }
+            {"exatamente", "n..n" }
         };
     }
 }

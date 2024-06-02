@@ -19,7 +19,7 @@ namespace SBVRTransformV2.Componentes
         {
             XDocument? xmlDoc = null;
 
-            using (StreamReader oReader = new StreamReader(path, Encoding.GetEncoding("ISO-8859-1")))
+            using (StreamReader oReader = new StreamReader(path, Encoding.GetEncoding("UTF-8")))
             {
                 xmlDoc = XDocument.Load(oReader);
                 int countClasse = 1;
@@ -98,9 +98,13 @@ namespace SBVRTransformV2.Componentes
                     foreach (var item in associacao)
                     {
 
-                        var d = associacao.Descendants(sbvr + "definition");
-                        var r = associacao.Descendants(sbvr + "role");
+                        var d = item.Descendants(sbvr + "definition");
+                        var r = item.Descendants(sbvr + "role");
                         var f = r.Descendants(sbvr + "FactTypeRole");
+
+                        var t = d.Descendants(sbvr + "Text").First().Value;
+                     
+
                         int index = 0;
                         foreach (var p in f)
                         {
@@ -114,7 +118,7 @@ namespace SBVRTransformV2.Componentes
                         RelValues rel = new RelValues();
                         rel.Type = "Associantion";
                         rel.Cardinality = dics.Cardinalidades.
-                            Where(x => d.Elements(sbvr + "Text").First().Value.Contains(x.Key)).First().Value;
+                            Where(x => t.Contains(x.Key)).First().Value;
                         rel.Class1 = dics.Classes.Where(x => x.Value.Equals(classesRel[0])).First().Key;
                         rel.Class2 = dics.Classes.Where(x => x.Value.Equals(classesRel[1])).First().Key;
                         dics.Relacionamento.Add(countRel, rel);

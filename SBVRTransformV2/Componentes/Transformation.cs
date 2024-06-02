@@ -19,17 +19,17 @@ namespace SBVRTransformV2.Componentes
             {
                 foreach (var c in dics.Classes)
                 {
-                    umlString.AppendLine(@"<packagedElement xmi:type = 'uml:Class' xmi:id = '" + c.Key + "' name = '" + c.Value + "'>");
+                    umlString.AppendLine(@"<packagedElement xmi:type = 'uml:Class' xmi:id = 'C" + c.Key + "' name = '" + c.Value + "'>");
                     foreach (var a in dics.Atributos.Where(x => x.Value.ClassId == c.Key))
                     {
-                        umlString.AppendLine(@"<ownedAttribute xmi:id = '"+ a.Key +"' name = '"+ a.Value.Name +"' type = '"+ a.Value.Type +"' />");
+                        umlString.AppendLine(@"<ownedAttribute xmi:id = 'A"+ a.Key +"' name = '"+ a.Value.Name +"' type = '"+ a.Value.Type +"' />");
                     }
 
                     if (dics.Herancas.Any(x => x.Value.Child == c.Key))
                     {
                         foreach (var h in dics.Herancas.Where(x => x.Value.Child == c.Key))
                         {
-                            umlString.AppendLine(@"<generalization xmi:id = '" + h.Key +"' general = '"+ h.Value.Parent +"' />");
+                            umlString.AppendLine(@"<generalization xmi:id = 'G" + h.Key +"' general = 'C"+ h.Value.Parent +"' />");
                         }     
                     }
                     umlString.AppendLine(@"</packagedElement>");  
@@ -37,59 +37,70 @@ namespace SBVRTransformV2.Componentes
 
                 foreach (var e in dics.Enumeracoes)
                 {
-                    umlString.AppendLine(@"<packagedElement xmi:type='uml:Enumeration' xmi:id='"+ e.Key+"' name='"+ e.Value +"'>");
+                    umlString.AppendLine(@"<packagedElement xmi:type='uml:Enumeration' xmi:id='E"+ e.Key+"' name='"+ e.Value +"'>");
                     foreach (var i in dics.ItensEnumeracoes.Where(x => x.Value.EnumId == e.Key))
                     {
-                        umlString.AppendLine(@"<ownedLiteral xmi:id='"+ i.Key+"' name='"+ i.Value.Name+"'/>");
+                        umlString.AppendLine(@"<ownedLiteral xmi:id='I"+ i.Key+"' name='"+ i.Value.Name+"'/>");
                     }
                     umlString.AppendLine(@"</packagedElement>");
                 }
 
                 int countRel = 1;
+                int countCar = 1;
+                int countEnds = 1;
                 foreach (var r in dics.Relacionamento)
                 {
-                    
-                        umlString.AppendLine(@"<packagedElement xmi:type='uml:Association' xmi:id='Association_"+ countRel +"'>");
-                        countRel++;
-                        umlString.AppendLine(@"<memberEnd xmi:idref='AssociationEnd_1'/>");
-                        umlString.AppendLine(@"<memberEnd xmi:idref='AssociationEnd_2'/>");
-                        umlString.AppendLine(@"<ownedEnd xmi:id='AssociationEnd_1' type='Class_1' name='"+ dics.Classes.
-                            Where(x => x.Key == r.Value.Class1).First().Value +"'>");
-                        umlString.AppendLine(@"<type xmi:idref='Class_2'/>");
 
-                        if (r.Value.Type.Equals("Aggregation"))
+
+                        umlString.AppendLine(@"<packagedElement xmi:type='uml:Association' xmi:id='Association_"+ countRel +"'>");
+
+                        if(r.Value.Type == "Aggregation")
                         {
-                            umlString.AppendLine(@"<aggregation xmi:type='uml: AggregationKind' value='shared'/>");
+                            umlString.AppendLine(@"<ownedEnd xmi:id='R1" + countEnds + "' type='C" + r.Value.Class1 + "' aggregation='shared' association='Association_ " + countRel + "'>");
                         }
+                        else
+                        {
+                            umlString.AppendLine(@"<ownedEnd xmi:id='R1" + countEnds + "' type='C" + r.Value.Class1 + "' association='Association_ " + countRel + "'>");
+                        }   
+                    
+                      
 
                         if (int.TryParse(r.Value.Cardinality.Substring(0, 1), out int result))
                         {
-                            umlString.AppendLine(@"<lowerValue xmi:type='uml:LiteralInteger' xmi:id='Lower_1' value='"+ 
+                            umlString.AppendLine(@"<lowerValue xmi:type='uml:LiteralInteger' xmi:id='Lower_" + countCar + "' value='"+ 
                                 r.Value.Cardinality.Substring(0, 1) + "'/>");
                         }
                         else
                         {
-                            umlString.AppendLine(@"<lowerValue xmi:type='uml:LiteralUnlimitedNatural' xmi:id='Lower_1' value='" +
+                            umlString.AppendLine(@"<lowerValue xmi:type='uml:LiteralUnlimitedNatural' xmi:id='Lower_"+ countCar + "' value='" +
                                 r.Value.Cardinality.Substring(0, 1) + "'/>");
                         }
 
                         if (int.TryParse(r.Value.Cardinality.Substring(3, 1), out int result2))
                         {
-                            umlString.AppendLine(@"<lowerValue xmi:type='uml:LiteralInteger' xmi:id='Upper_1' value='" + 
+                            umlString.AppendLine(@"<upperValue xmi:type='uml:LiteralInteger' xmi:id='Upper_" + countCar + "' value='" + 
                                 r.Value.Cardinality.Substring(3, 1) + "'/>");
                         }
                         else
                         {
-                            umlString.AppendLine(@"<lowerValue xmi:type='uml:LiteralUnlimitedNatural' xmi:id='Upper_1' value='" +
+                            umlString.AppendLine(@"<upperValue xmi:type='uml:LiteralUnlimitedNatural' xmi:id='Upper_" + countCar + "' value='" +
                                 r.Value.Cardinality.Substring(3, 1) + "'/>");
                         }
-                    umlString.AppendLine(@"</ownedEnd>");
-                    umlString.AppendLine(@"<ownedEnd xmi:id='AssociationEnd_2' type='Class_2' name='" + dics.Classes.
-                            Where(x => x.Key == r.Value.Class2).First().Value + "'>");
-                    umlString.AppendLine(@"<type xmi:idref='Class_1'/>");
-                    umlString.AppendLine(@"</ownedEnd>");
-                    umlString.AppendLine(@"</packagedElement>");
+                        umlString.AppendLine(@"</ownedEnd>");
 
+                        if (r.Value.Type == "Aggregation")
+                        {
+                            umlString.AppendLine(@"<ownedEnd xmi:id='R2" + r.Value.Class2 + "' type='C" + r.Value.Class2 + "' aggregation='shared' association='Association_ " + countRel + "'>");
+                        }
+                        else
+                        {
+                            umlString.AppendLine(@"<ownedEnd xmi:id='R2" + r.Value.Class2 + "' type='C" + r.Value.Class2 + "' association='Association_ " + countRel + "'>");
+                        } 
+                        umlString.AppendLine(@"</ownedEnd>");
+                        umlString.AppendLine(@"</packagedElement>");
+                        countRel++;
+                        countCar++;
+                        countEnds++;
                 }
             }
             umlString.AppendLine(@"</uml:Model>");
