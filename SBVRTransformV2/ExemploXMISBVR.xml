@@ -141,15 +141,15 @@
 
 
   <SBVR:AssociativeFactType>
-    <SBVR:name>Conta básica acessa até 2 Conteúdos simultâneos</SBVR:name>
+    <SBVR:name>Conta acessa até 6 Conteúdos simultâneos</SBVR:name>
     <SBVR:definition>
-      <SBVR:Text>Uma conta básica pode acessar no máximo dois conteúdos simultâneos.</SBVR:Text>
+      <SBVR:Text>Uma conta básica pode acessar no máximo seis conteúdos simultâneos.</SBVR:Text>
     </SBVR:definition>
     <SBVR:role>
       <SBVR:FactTypeRole>
-        <SBVR:name>Conta Básica</SBVR:name>
+        <SBVR:name>Conta</SBVR:name>
         <SBVR:rolePlayer>
-          <SBVR:ObjectTypeReference href="#ContaBasica"/>
+          <SBVR:ObjectTypeReference href="#Conta"/>
         </SBVR:rolePlayer>
       </SBVR:FactTypeRole>
       <SBVR:FactTypeRole>
@@ -161,46 +161,6 @@
     </SBVR:role>
   </SBVR:AssociativeFactType>
 
-  <SBVR:AssociativeFactType>
-    <SBVR:name>Conta premium acessa até 4 Conteúdos simultâneos</SBVR:name>
-    <SBVR:definition>
-      <SBVR:Text>Uma conta premium pode acessar no máximo quatro conteúdos simultâneos.</SBVR:Text>
-    </SBVR:definition>
-    <SBVR:role>
-      <SBVR:FactTypeRole>
-        <SBVR:name>Conta Premium</SBVR:name>
-        <SBVR:rolePlayer>
-          <SBVR:ObjectTypeReference href="#ContaPremium"/>
-        </SBVR:rolePlayer>
-      </SBVR:FactTypeRole>
-      <SBVR:FactTypeRole>
-        <SBVR:name>Conta</SBVR:name>
-        <SBVR:rolePlayer>
-          <SBVR:ObjectTypeReference href="#Conteudo"/>
-        </SBVR:rolePlayer>
-      </SBVR:FactTypeRole>
-    </SBVR:role>
-  </SBVR:AssociativeFactType>
-
-  <SBVR:AssociativeFactType>
-    <SBVR:name>Conta diamond acessa até 6 Conteúdos simultâneos</SBVR:name>
-    <SBVR:definition>
-      <SBVR:Text>Uma conta premium pode acessar no máximo seis conteúdos simultâneos.</SBVR:Text>
-    </SBVR:definition>
-    <SBVR:role>
-      <SBVR:FactTypeRole>
-        <SBVR:name>Conta Diamond</SBVR:name>
-        <SBVR:rolePlayer>
-          <SBVR:ObjectTypeReference href="#ContaDiamond"/>
-        </SBVR:rolePlayer>
-      </SBVR:FactTypeRole>
-      <SBVR:FactTypeRole>
-        <SBVR:name>Conta</SBVR:name>
-        <SBVR:rolePlayer>
-          <SBVR:ObjectTypeReference href="#Conteudo"/>
-        </SBVR:rolePlayer>
-      </SBVR:FactTypeRole>
-    </SBVR:role>
-  </SBVR:AssociativeFactType>
+  
 
 </xmi:XMI>
