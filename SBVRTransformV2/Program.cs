@@ -13,5 +13,7 @@ string absolutePath = Path.GetFullPath(relativePath);
 extr.ClassExtraction(absolutePath, dics);
 save.SaveFile(trans.TransformationUML(dics));
 
+Console.WriteLine("Concluído!");
+
 
 

@@ -10,12 +10,12 @@ namespace SBVRTransformV2.Dicionarios
   
     public class Dicionarios
     {
-        public Dictionary<int, string> Classes = new Dictionary<int, string>();
-        public Dictionary<int, AttrValues> Atributos = new Dictionary<int, AttrValues>();
-        public Dictionary<int, RelValues> Relacionamento = new Dictionary<int, RelValues>();
-        public Dictionary<int, HerVallues> Herancas = new Dictionary<int, HerVallues>();
-        public Dictionary<int, string> Enumeracoes = new Dictionary<int, string>();
-        public Dictionary<int, EnumItemValue> ItensEnumeracoes = new Dictionary<int, EnumItemValue>();
+        public IDictionary<int, string> Classes = new Dictionary<int, string>();
+        public IDictionary<int, AttrValues> Atributos = new Dictionary<int, AttrValues>();
+        public IDictionary<int, RelValues> Relacionamento = new Dictionary<int, RelValues>();
+        public IDictionary<int, HerVallues> Herancas = new Dictionary<int, HerVallues>();
+        public IDictionary<int, string> Enumeracoes = new Dictionary<int, string>();
+        public IDictionary<int, EnumItemValue> ItensEnumeracoes = new Dictionary<int, EnumItemValue>();
 
 
         public readonly IDictionary<string, string> Cardinalidades = new Dictionary<string, string>()
